@@ -1,0 +1,298 @@
+<!DOCTYPE text/html>
+<html lang="ro">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="keywords" content="project, infoiasi, web" />
+	<title>Wade report</title>
+	<link rel="stylesheet" href="scholarly.css">
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+	<header>
+		<p class="title">Scholarly HTML</p>
+	</header>
+	<article typeof="schema:ScholarlyArticle" resource="#">
+		<h1>ToWAs</h1>
+		<section>
+			<ol>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:author" href="https://www.facebook.com/alex.grigoruta" typeof="schema:Person">
+						<span property="schema:givenName">Alex</span>
+						<span property="schema:familyName">Grigoruta</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:grigoruta.alexandru@info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:contributor" href="https://www.facebook.com/razvan.cazuc" typeof="schema:Person">
+						<span property="schema:givenName">Razvan</span>
+						<span property="schema:additionalName">Constantin</span>
+						<span property="schema:familyName">Cazuc</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:cazuc.constantin.razvan@info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:contributor" href="https://www.facebook.com/stefan.saramet" typeof="schema:Person">
+						<span property="schema:givenName">Stefan</span>
+						<span property="schema:familyName">Saramet</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:saramet.stefan@students.info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+			</ol>
+			<ol>
+				<li>
+					<a href="http://www.info.uaic.ro/bin/Main/" typeof="schema:CollegeOrUniversity">
+						<span property="schema:name">Faculty of Computer Science Iasi</span>
+					</a>
+				</li>
+				<li>
+					<a href="http://www.uaic.ro/" typeof="schema:CollegeOrUniversity">
+						<span property="schema:name">Alexandru Ioan Cuza University</span>
+					</a>
+				</li>
+			</ol>
+		</section>
+		<section typeof="">
+			<h2>Table of contents</h2>
+			<ol>
+				<li>
+					<a href="#descriere">Abstract</a>
+				</li>
+				<li>
+					<a href="#tehnologii">Motivation</a>
+				</li>
+				<li>
+					<a href="#diagrama">Architecture</a>
+				</li>
+				<li>
+					<a href="#provenienta">Technologies</a>
+				</li>
+				<li>
+					<a href="#diagrama1">Use Case Diagram</a>
+				</li>
+				<li>
+					<a href="#interfata">Graphical Interface</a>
+				</li>
+				<li>
+					<a href="#functionalitati">Data</a>
+				</li>
+				<li>
+					<a href="#schemaBD">Recommendation system</a>
+				</li>
+				<li>
+					<a href="#blog">Progress Blog</a>
+				</li>
+				<li>
+					<a href="#bibliografie">References</a>
+				</li>
+			</ol>
+		</section>
+		<section>
+			<a name="descriere">
+				<h2>Abstract</h2>
+			</a>
+			<p>
+				ToWAs, Tourist Web Assistant, is a web application which provides relevant map-related data based on a user's profile. It 
+				uses semantic-enabled data from Wikidata, LinkedGeoData, WikiVoyage and Eurostat combined together with a recommendation system
+				in order to generate and display the best itinerary for the user. All of the data needed to create a user profile (user travelling
+				with family, user which travels with a big group of friends, etc.) is retrieved from Facebook, and completed with a couple of forms
+				from the application in case the user doesn't have enough relevant information on his account.
+			</p>
+		</section>
+		<section typeof="sa:MaterialsAndMethods">
+			<a name="tehnologii">
+				<h2>Motivation</h2>
+			</a>
+			<p>
+				The Federal Aviation Administration Air Traffic Organization provides service to more than 43,000 flights and 2.6 million 
+				airline passengers across more than 46 million square kilometers of airspace. They state that over 15,8 million of flights 
+				are handled yearly, with an average of 43 thousand on a daily basis. On average an airplane has a capacity of 475 passengers,
+				meaning that there are about 7.5 billion passengers yearly, and while some of them travel to go back home, a great majority
+				will travel to foreign places, either be just business or leisure. It is the human nature to explore and find new exciting
+				things to talk about and remember forever. Therefore every passenger travelling to a new place, will search and look for 
+				landmarks, museums, restaurants, amusement parks, fancy hotels, that they will enjoy and keep in their minds for a long time.
+				Instead of them planning their itineraries before going somewhere, why not have a smart assistant do that for them?
+			</p>
+			<p>
+				The solution we propose is ToWAs, the friendly Tourist Web Assistant, which profiles the user thoroughly to create the best
+				travel plan based on his personality and needs. Is the user a student going on holiday to Ibiza with his/her best friends?
+				ToWAs will recommend the best night clubs and beaches from there. Is the user a father of two, travelling together with his
+				family in Paris? ToWAs got their trip already planned beforehand, and marked Disneyland as the first attraction on the list.
+				Our goal is to provide the best experience and create memorable events for every user that uses ToWAs for their next trip.
+			</p>
+			<p>
+				ToWAs uses the data the user provides throughout his facebook profile and lets him/her complete with any kind of additional
+				information that they consider relevant for their next trip. Afterwards, a travel plan is generated and displayed to the user. 
+				Did ToWAs forget or did not consider a landmark or attraction you really wanted to go to? No worries, you can edit your travel
+				plan at any time and the application will adapt to your modifications.
+			</p>
+		</section>
+		<section>
+			<a name="diagrama">
+				<h2>Architecture</h2>
+			</a>
+			<figure typeof="sa:Image">
+				<img src="architecture.png">
+			</figure>
+		</section>
+		<section>
+			<a name="provenienta">
+				<h2>Technologies</h2>
+			</a>
+			<p>
+				For the Back-End part, we decided to use Java EE using Spring Boot, since it's easy to configure, and we have some 
+				experience with it from other University projects from the past years. We will use Jersey for developing the RESTful
+				API, and Apache Jena for the Semantic part which can handle RDF, RDFS, RDFa, OWL and SPARQL. As for the database, we opted
+				for a NoSQL db, using MongoDB since it's lightweight, having easy to access and edit records, in which we will store mostly 
+				user data.
+			</p>
+			<p>
+				For the Front-End part, we aim for a Single Page Application (SPA), using React as the main helping library, but we
+				will not abuse it and also have plain JavaScript code snippets for the native performance boost and get rid of redundant
+				boilerplating. We will use the latest stable ECMAScript spec (ES8), and Webpack in order to optimize the build and overall
+				performance of the application. As for the styling of the page, ToWAs will have Sass as the main CSS preprocessor. The map
+				will be rendered using OpenLayers and retrieve relevant data about locations from Google Maps API.
+			</p>
+		</section>
+		<section>
+			<a name="diagrama1">
+				<h2>Use Case Diagram</h2>
+			</a>
+			<figure typeof="sa:Image">
+				<img src="usecase.png">
+			</figure>
+		</section>
+		<section>
+			<a name="interfata">
+				<h2>Graphical Interface</h2>
+			</a>
+			<p>
+				We opted for a Single-Page Application, which is simplifying the user experience and dynamically loading the data in order
+				to focus on the offered services. When the user launches the application he will be sent to the login page, where he has a small
+				description about the application and a Facebook login button, which will redirect him to a Facebook permission granting page and
+				afterwards to the landing page of ToWAs
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs login page.png">
+			</figure>
+			<p>
+				After logging in, he will be presented with the landing page, the dashboard, setting the main focus on the map itself. The first time
+				when the user logs in, the application will get his current position and try to create a general trip plan for it and display points
+				of interest on the map. When he hovers over them, he will have additional data about them, including how many of his Facebook friends
+				have been there and he will be able to see their pictures as well. The search bar from the navbar is there for the user to search for
+				a location and see what does ToWAs generate for it. On the top right he has three buttons. The first one is actually his profile picture 
+				from Facebook if he has one, and if he clicks it he will have two options: to view his profile with the data he provides ToWAs with and 
+				the option to logout.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs dashboard.png">
+			</figure><figure typeof="sa:Image">
+				<img src="ToWAs dasboard hover.jpg">
+			</figure>
+			<p>
+				When the user presses the third button from the navbar, a container will slide from the right, showing a list of all the locations that
+				ToWAs found for him. When he clicks on any of the items, the map will have that location centered and the distances toward the other 
+				locations will be calculated again based on the current item. As an addition, a route/itinerary will be generated using all of the recommended
+				points of interest, using the best route from point A to point B.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs location details and route.png">
+			</figure>
+			<p>
+				The second button will launch a modal in which he can describe his next trip for a better recommendation the next time he enters the app.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs trip info.png">
+			</figure>
+		</section>
+		<section>
+			<a name="functionalitati">
+				<h2>Data</h2>
+			</a>
+			<p>
+				The main data we will use is retrieved from Facebook, using their Graph API, and more precisely, we will check the user's basic
+				information (age, gender, relationship, etc.), user likes, user friends extended to their check-ins and photos from there. The 
+				user data will be completed using our own forms, just in case the user does not have too many details projected on Facebook, in
+				order to create a better profiling.
+			</p>
+			<p>
+				As for GeoData data, we will have a combination of three semantic-enabled providers: LinkedGeoData, WikiVoyage and Wikidata. To 
+				follow the traveller trends all over Europe, we will make use of Eurostat's statistics and comply our recommendations based on that.
+				The geodata will be accessed through SPARQL endpoints provided by each API.
+			</p>
+		</section>
+		<section>
+			<a name="schemaBD">
+				<h2>Recommendation System</h2>
+			</a>
+			<p>
+				A recommendation engine, also known as a recommender system, is software that analyzes available data to make suggestions
+				for something that a website user might be interested in, such as a book, a video or a job, among other possibilities.
+				When it comes to recommendation systems, there are three main types of algorithms worth mentioning:
+			</p>
+			<ul>
+				<li>
+					Content based: if you like an item, then you will also like a similar item
+				</li>
+				<li>
+					Collaborative: If a person A has the same interests as the person B, then the two should like the same items
+				</li>
+				<li>
+					Hybrid: a combination between the two above mentioned types
+				</li>
+			</ul>
+			<p>
+				For our application we are going to use a Hybrid approach, combining both content based recommendation and collaborative recommendation.
+				We will retrieve all the data that the user fills in our form regarding the next trip and filter exactly the relevant data, then based on
+				his check-ins and likes we can then optimise our result. The collaborative part requires the user's friend data, their check-ins, their 
+				interests and recommend locations and points of interest based on that.
+			</p>
+		</section>
+		<section>
+			<a name="blog">
+				<h2>Progress Blog</h2>
+			</a>
+			<a href="https://github.com/AGrigoruta/WADe-ToWAs/wiki/Progress-Blog">Team Progress Blog</a>
+		</section>
+		<section typeof="sa:ReferenceList">
+			<a name="bibliografie">
+				<h2>References</h2>
+			</a>
+			<ul>
+				<li>
+					<a href="http://linkedgeodata.org/About">LinkedGeoData</a>
+				</li>
+				<li>
+					<a href="https://en.wikivoyage.org/wiki/Wikivoyage:RDF">WikiVoyage</a>
+				</li>
+				<li>
+					<a href="https://ec.europa.eu/eurostat/web/tourism/data/database">Eurostat</a>
+				</li>
+				<li>
+					<a href="https://en.wikipedia.org/wiki/Recommender_system">Recommender System</a>
+				</li>
+				<li>
+					<a href="https://www.geonames.org/">Geonames</a>
+				</li>
+				<li>
+					<a href="https://cloud.google.com/maps-platform/">Google Maps API</a>
+				</li>
+				<li>
+					<a href="https://developers.facebook.com/docs/graph-api/">Facebook Graph API</a>
+				</li>
+			</ul>
+		</section>
+	</article>
+	<footer>
+		@ToWAs
+	</footer>
+</body>
+
+</html>
