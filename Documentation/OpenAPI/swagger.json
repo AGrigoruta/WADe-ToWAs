@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Create a smart multi-device application able to provide useful tourist-related information based on knowledge bases such as LinkedGeoData and Wikidata. Take into consideration the use of proper conceptual models regarding the map-related information, car GPS integration, user needs (example: a family having small children wants a smooth itinerary including many stops versus a group of students focused on fun + roads full of surprises), internationalization (i.e. support for automated translation) and localization, plus the integration with popular social Web applications – supporting actions like sharing and/or accessing photos, videos, reviews, advices, etc. The information of interest will be also provided by a SPARQL endpoint. Additional data could be accessed on EuroStat and/or various travel-related APIs.",
+    "version": "1.0.0",
+    "title": "ToWAs (Tourist Web Assitant)",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/itinerary": {
+      "get": {
+        "tags": [
+          "itinerary"
+        ],
+        "summary": "Recommend travel locations based on user's profile",
+        "description": "By accessing the user's previously saved data regarding preferences, select the best matching itinerary route(s).",
+        "operationId": "recommendItinerary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Best matching routes according to the user profile",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Place"
+              }
+            }
+          },
+          "404": {
+            "description": "No place recommendations available"
+          }
+        }
+      }
+    },
+    "/itinerary/city/{cityName}": {
+      "get": {
+        "tags": [
+          "itinerary"
+        ],
+        "summary": "Recommend best travel itinerary based on the city a traveler is next to or into",
+        "description": "By taking the current city as first selection criterion, match and return the best travel location(s).",
+        "operationId": "itineraryByCity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cityName",
+            "required": true,
+            "type": "string",
+            "description": "The city name where a customer is located"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Best matching routes according to the location (city) and user profile",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Place"
+              }
+            }
+          },
+          "401": {
+            "description": "This is not a valid city name"
+          },
+          "404": {
+            "description": "No place recommendations available"
+          }
+        }
+      }
+    },
+    "/itinerary/location": {
+      "post": {
+        "tags": [
+          "itinerary"
+        ],
+        "summary": "Recommend best travel itinerary based on current location",
+        "description": "By taking the current location as first selection criterion, match and return the best travel location(s).",
+        "operationId": "itineraryByLocation",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The current location of the requester",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Best matching routes according to the location and user profile",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Place"
+              }
+            }
+          },
+          "401": {
+            "description": "There is no location to correspond with the coordinates"
+          },
+          "404": {
+            "description": "No place recommendations available"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Place": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "example": "Notre Dame Cathedral"
+        },
+        "city": {
+          "type": "string",
+          "example": "Paris"
+        },
+        "country": {
+          "type": "string",
+          "example": "France"
+        },
+        "latitude": {
+          "type": "number",
+          "example": 48.852966
+        },
+        "longitude": {
+          "type": "number",
+          "example": 2.349902
+        },
+        "order": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "example": 48.852966
+        },
+        "longitude": {
+          "type": "number",
+          "example": 2.349902
+        }
+      }
+    }
+  }
+}
