@@ -26,14 +26,16 @@ export class AuthService {
     };
 
     let authResponse: any = await getLoginStatus();
-    if (!this.hasAuthenticatedOnce) {
-      this.hasAuthenticatedOnce = true;
-    }
+
     authenticatedObject.redirect = !this.hasAuthenticatedOnce;
     if (authResponse && authResponse.status === 'connected') {
       authenticatedObject.authenticated = true;
     } else {
       authenticatedObject.authenticated = false;
+    }
+
+    if (!this.hasAuthenticatedOnce) {
+      this.hasAuthenticatedOnce = true;
     }
 
     return authenticatedObject;
