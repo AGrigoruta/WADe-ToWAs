@@ -1,0 +1,107 @@
+.login__container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__background-image {
+    background-image: url('../../assets/images/login-screen.webp');
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -2;
+}
+
+.login__background-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.login__button {
+    background-color: #3b5998;
+    color: #fff;
+    font-size: 1.5em;
+}
+
+.login__button > i {
+    margin-right: 14px;
+}
+
+.login__card {
+    background-color: #fff;
+    width: 30%;
+    min-width: 320px;
+    min-height: 240px;
+    max-width: 1368px;
+    max-height: 768px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__card_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 3vw;
+}
+
+.login__card_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1vw;
+    padding: 20px;
+}
+
+.login__card_footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4vw;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.separator {
+    width: 100%;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 1066px) {
+  .login__card_header {
+     font-size: 2em;
+  }
+
+  .login__card_content {
+     font-size: 0.7em;
+  }
+
+  .login__card_footer {
+     font-size: 0.9em;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .login__card_header {
+     font-size: 4.8em;
+  }
+
+  .login__card_content {
+    font-size: 1.6em;
+  }
+
+  .login__card_footer {
+    font-size: 2.24em;
+  }
+}

@@ -1,1 +1,21 @@
-<button type="button" class="btn" (click)="submitLogin();">Login with facebook</button>
+<div class="login__container">
+  <div class="login__background-image"></div>
+  <div class="login__background-backdrop"></div>
+  <div class="login__card">
+    <div class="login__card_header">
+      <span>Tourist Web Assistant</span>
+      <span>(ToWAs)</span>
+    </div>
+    <div class="separator"></div>
+    <div class="login__card_content">
+      <span>TOWAs is your friendly trip planner, who's here to help you find landmarks and create itineraries based on your needs. ToWAs uses your information from your Facebook account to provide the best and most relevant suggestions for your next trip.</span>
+    </div>
+    <div class="separator"></div>
+    <div class="login__card_footer">
+      <button type="button" class="btn login__button" (click)="submitLogin()">
+        <i class="fab fa-facebook-square"></i>
+        <span>Continue with Facebook</span>
+      </button>
+    </div>
+  </div>
+</div>
