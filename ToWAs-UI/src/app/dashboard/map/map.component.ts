@@ -9,6 +9,7 @@ import OlView from 'ol/View';
 // Solution: Suppress import errors to bypass compilation (the 'missing' modules are there in fact, so they are false positive errors)
 //@ts-ignore
 import { fromLonLat } from 'ol/proj';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-map',
@@ -23,7 +24,7 @@ export class MapComponent implements OnInit {
   view: OlView;
   currentPosition: any;
 
-  constructor() { }
+  constructor(private user: UserService) { }
 
   async ngOnInit() {
 
@@ -52,6 +53,7 @@ export class MapComponent implements OnInit {
 
     let asyncPosition = await getCurrentPosition();
     this.currentPosition = asyncPosition;
+    this.user.setPosition(this.currentPosition);
 
     this.source = new OlXYZ({
       url: 'http://tile.osm.org/{z}/{x}/{y}.png'
