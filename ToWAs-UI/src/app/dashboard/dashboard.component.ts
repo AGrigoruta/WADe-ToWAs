@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,14 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  name: string;
+  profile_picture: any;
+  sidebar_active:boolean = false;
+
+  constructor(public router: Router, public auth: AuthService) { }
 
   ngOnInit() {
+    this.getUserDetails();
   }
 
   async logout() {
@@ -34,6 +40,25 @@ export class DashboardComponent implements OnInit {
     }
 
     return;
+  }
+
+  getUserDetails() {
+    this.auth.isAuthenticated().then((res) => {
+      if (res) {
+        //@ts-ignore
+        window.FB.api('/me', {fields: ['first_name', 'picture']}, (response) => {
+          console.log(response);
+          this.profile_picture = response.picture ? response.picture.data : {};
+          this.name = response.first_name;
+        });  
+      } else {
+        this.router.navigate(['login']);
+      }
+    })
+  }
+
+  openSidebar() {
+    this.sidebar_active = !this.sidebar_active;
   }
 
 }

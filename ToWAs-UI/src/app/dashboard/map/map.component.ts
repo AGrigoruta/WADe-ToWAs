@@ -21,10 +21,37 @@ export class MapComponent implements OnInit {
   source: OlXYZ;
   layer: OlTileLayer;
   view: OlView;
+  currentPosition: any;
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    const getCurrentPosition = () => {
+      return new Promise(async (res) => {
+        let currentPosition:any = {}
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            currentPosition.longitude = position.coords.longitude;
+            currentPosition.latitude = position.coords.latitude;
+            res(currentPosition);
+          }, (err) => {
+            console.log(err);
+            currentPosition.longitude = 27.5816112;
+            currentPosition.latitude = 47.1560762;
+            res(currentPosition);
+          });
+        } else {
+          console.log('Geolocation is not available in this browser');
+          currentPosition.longitude = 27.5816112;
+          currentPosition.latitude = 47.1560762;
+          res(currentPosition);
+        }
+      })
+    }
+
+    let asyncPosition = await getCurrentPosition();
+    this.currentPosition = asyncPosition;
 
     this.source = new OlXYZ({
       url: 'http://tile.osm.org/{z}/{x}/{y}.png'
@@ -35,7 +62,7 @@ export class MapComponent implements OnInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([27.5816112, 47.1560762]),
+      center: fromLonLat([this.currentPosition.longitude, this.currentPosition.latitude]),
       zoom: 15
     });
 
