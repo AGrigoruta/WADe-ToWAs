@@ -1,6 +1,5 @@
 ﻿using System;
 using VDS.RDF;
-using VDS.RDF.Writing;
 
 namespace ToWas.Rdf
 {
@@ -25,12 +24,6 @@ namespace ToWas.Rdf
             {
                 Console.WriteLine(t.ToString());
             }
-
-            var ntwriter = new NTriplesWriter();
-            ntwriter.Save(g, "HelloWorld.nt");
-
-            var rdfxmlwriter = new RdfXmlWriter();
-            rdfxmlwriter.Save(g, "HelloWorld.rdf");
         }
     }
 }
