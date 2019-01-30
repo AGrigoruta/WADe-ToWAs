@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using VDS.RDF;
 using VDS.RDF.Query;
 
 namespace ToWas.Rdf
@@ -36,6 +34,14 @@ namespace ToWas.Rdf
             var results = _wikiDataEndpoint.QueryWithResultSet("SELECT DISTINCT ?city ?cityLabel ?country ?countryLabel ?loc WHERE {\r\n?city wdt:P17 wd:Q33 .\r\n\t?city wdt:P31/wdt:P279* wd:Q515 .\r\n\t?city wdt:P17 ?country .\r\n\t?city wdt:P625 ?loc .\r\n\tSERVICE wikibase:label {\r\n\t\tbd:serviceParam wikibase:language \"en\" .\r\n\t}\r\n}");
 
 
+        }
+
+        public void GetAttractionsFromCity(string cityToBeSearched)
+        {
+            var results = _dbPediaEndpoint.QueryWithResultSet(
+                "select ?thing ?type ?typeName ?long ?lat ?country where {\r\n\r\nVALUES ?city {<http://dbpedia.org/resource/" +
+                cityToBeSearched +
+                ">}\r\n\r\noptional {\r\n?city dbo:country ?country\r\n}\r\n\r\n?thing dbo:location ?city. optional \r\n{\r\n?thing a ?type .\r\nVALUES ?type {<http://dbpedia.org/ontology/Hotel>}\r\nBIND( \"Hotel\" as ?typeName )\r\n}\r\n optional\r\n{\r\n?thing a ?type.\r\nVALUES ?type {dbo:Museum}\r\nBIND( \"Museum\" as ?typeName )\r\n}\r\noptional\r\n{\r\n?thing a ?type.\r\nVALUES ?type {dbo:Pyramid}\r\nBIND( \"Pyramid\" as ?typeName )\r\n} optional\r\n{\r\n?thing a ?type.\r\nVALUES ?type {yago:Skyscraper104233124}\r\nBIND( \"Skyscraper\" as ?typeName )\r\n}\r\n\r\noptional\r\n{\r\n?thing a ?type.\r\nVALUES ?type {dbo:Park}\r\nBIND( \"Park\" as ?typeName )\r\n}\r\n optional\r\n{\r\n?thing a ?type.\r\nVALUES ?type {yago:Church103028079}\r\nBIND( \"Church\" as ?typeName )\r\n}\r\n\r\noptional\r\n{\r\n?thing geo:long ?long.\r\n?thing geo:lat ?lat\r\n} {\r\n?thing a dbo:Place\r\n}\r\n\r\nfilter (BOUND (?type))\r\n\r\n}");
         }
     }
 }
