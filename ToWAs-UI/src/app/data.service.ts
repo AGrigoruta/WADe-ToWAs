@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
@@ -14,7 +14,8 @@ export class DataService {
   }
 
   sendCityName(data: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
     let url = `${this.apiUrl}/itinerary/location`;
-    return this.http.post(url, data);
+    return this.http.post(url, data, {headers: headers});
   }
 }

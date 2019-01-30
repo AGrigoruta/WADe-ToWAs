@@ -10,11 +10,14 @@ import OlFeature from 'ol/Feature';
 import OlPoint from 'ol/geom/Point';
 import OlStyle from 'ol/style/Style';
 import OlIcon from 'ol/style/Icon';
+import OlOverlay from 'ol/Overlay';
 
 // Problem: The Definetly Typed project providing all of the types needed for the module pattern is outdated for OpenLayers
 // Solution: Suppress import errors to bypass compilation (the 'missing' modules are there in fact, so they are false positive errors)
 //@ts-ignore
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
+//@ts-ignore
+import { toStringHDMS } from 'ol/coordinate';
 import { UserService } from 'src/app/user.service';
 
 @Component({
@@ -31,6 +34,7 @@ export class MapComponent implements OnInit, OnChanges {
   marker: OlFeature;
   vectorSource: OlVectorSource;
   vectorLayer: OlVectorLayer;
+  overlay: OlOverlay;
   currentPosition: any;
   markerList: any;
   @Input() data: any;
@@ -67,6 +71,20 @@ export class MapComponent implements OnInit, OnChanges {
     this.user.setPosition(this.currentPosition);
 
     this.markerList = []
+    const container = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    const closer = document.getElementById('popup-closer');
+
+    this.overlay = new OlOverlay({
+      element: container,
+      autoPan: true
+    });
+
+    closer.onclick = () => {
+      this.overlay.setPosition(undefined);
+      closer.blur();
+      return false;
+    };
 
     this.source = new OlXYZ({
       url: 'http://tile.osm.org/{z}/{x}/{y}.png'
@@ -84,16 +102,39 @@ export class MapComponent implements OnInit, OnChanges {
     this.map = new OlMap({
       target: 'map',
       layers: [this.layer],
-      view: this.view
+      view: this.view,
+      overlays: [this.overlay]
+    });
+
+    this.map.on('singleclick', (evt: any) => {
+      const coordinate = evt.coordinate;
+      const normalizedCoords = toLonLat(coordinate);
+      if (this.markerList.length > 0) {
+        this.markerList.forEach((item) => {
+          const normalizedItemCoords = toLonLat(item.get('geometry').flatCoordinates)
+          if (normalizedCoords[0].toFixed(2) === normalizedItemCoords[0].toFixed(2) && 
+              normalizedCoords[1].toFixed(2) === normalizedItemCoords[1].toFixed(2)) {
+            const hdms = toStringHDMS(normalizedItemCoords);
+            content.innerHTML = '';
+            content.innerHTML += '<p>Name:</p><code>' + item.get('name') + '</code><br>';
+            content.innerHTML += '<p>Type:</p><code>' + item.get('attractionType') + '</code><br>'
+            content.innerHTML += '<p>Coordinates:</p><code>' + hdms + '</code>'
+            this.overlay.setPosition(coordinate);
+            return;
+          }
+        })
+      }
+      
     });
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.data) {
+    if (!changes.data || changes.data.firstChange) {
       return;
     } else {
       setTimeout(() => {
+        this.markerList = [];
         this.map.removeLayer(this.vectorLayer);
         this.addMarkers();
       }, 1000)
@@ -104,9 +145,12 @@ export class MapComponent implements OnInit, OnChanges {
     this.data.forEach((item) => {
       const marker: OlFeature = new OlFeature({
         geometry: new OlPoint(fromLonLat([item.longitude, item.latitude])),
-        name: item.name,
-        picture: item.picture,
-        address: item.address
+        name: item.description,
+        nameUrl: item.descriptionUrl,
+        // picture: item.picture,
+        attractionType: item.attractionType,
+        attractionTypeUrl: item.attractionTypeUrl,
+        country: item.country
       });
       this.markerList.push(marker)
     })
@@ -114,7 +158,7 @@ export class MapComponent implements OnInit, OnChanges {
     const iconStyle = new OlStyle({
       image: new OlIcon(/** @type {olx.style.IconOptions} */({
         anchor: [0.5, 46],
-        scale: 0.05,
+        scale: 0.1,
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         opacity: 0.75,
@@ -132,10 +176,8 @@ export class MapComponent implements OnInit, OnChanges {
     });
 
     // Simulate ajax call but with dummy data for now
-    setTimeout(() => {
-      this.map.addLayer(this.vectorLayer);
-      this.centerMap(this.markerList[0].get('geometry').flatCoordinates[0], this.markerList[0].get('geometry').flatCoordinates[1]);
-    }, 1000);
+    this.map.addLayer(this.vectorLayer);
+    this.centerMap(this.markerList[0].get('geometry').flatCoordinates[0], this.markerList[0].get('geometry').flatCoordinates[1]);
 
   }
 

@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getUserDetails();
     // this.getValues();
-    this.itinerary = this.getItinerary().data;
+    // this.itinerary = this.getItinerary().data;
   }
 
   searchCity(event) {
@@ -41,7 +41,9 @@ export class DashboardComponent implements OnInit {
       return;
     } else {
       this.citySearch = this.citySearch.charAt(0).toUpperCase() + this.citySearch.slice(1);
-      this.api.sendCityName(this.citySearch).subscribe();
+      this.api.sendCityName({cityName: this.citySearch}).subscribe((res) => {
+        this.itinerary = res;
+      });
       this.citySearch = '';
     } 
   }
