@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ToWas.API.Models;
 using ToWas.Rdf;
+using ToWas.Rdf.Dtos;
 
 namespace ToWas.API.Controllers
 {
@@ -33,7 +35,15 @@ namespace ToWas.API.Controllers
         public ActionResult<ItineraryModel[]> GetItineraryByCurrentLocation(
             [FromBody] LocationRequestModel location)
         {
-            var pins = _recommendationService.GetPinsForCityName(location.CityName);
+            List<PinDto> pins;
+            try
+            {
+                pins = _recommendationService.GetPinsForCityName(location.CityName);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
 
             return pins.Select(ItineraryModel.From).ToArray();
         }
