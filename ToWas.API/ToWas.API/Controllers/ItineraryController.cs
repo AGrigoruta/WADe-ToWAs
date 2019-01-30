@@ -58,7 +58,7 @@ namespace ToWas.API.Controllers
                     TripType = location.TripType
                 });
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return NotFound();
             }
