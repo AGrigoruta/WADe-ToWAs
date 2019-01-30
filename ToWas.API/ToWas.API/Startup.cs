@@ -25,6 +25,7 @@ namespace ToWas.API
 
             services.AddTransient(typeof(ExampleRdfClass));
             services.AddTransient(typeof(SparqlExampleClass));
+            services.AddTransient(typeof(RecommendationService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

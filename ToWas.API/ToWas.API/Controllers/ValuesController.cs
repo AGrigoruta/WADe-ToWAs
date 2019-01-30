@@ -9,10 +9,12 @@ namespace ToWas.API.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly SparqlExampleClass _example2;
+        private readonly RecommendationService _recommendationService;
 
-        public ValuesController(SparqlExampleClass example2)
+        public ValuesController(SparqlExampleClass example2, RecommendationService recommendationService)
         {
             _example2 = example2;
+            _recommendationService = recommendationService;
         }
         // GET api/values
         [HttpGet]
@@ -20,7 +22,7 @@ namespace ToWas.API.Controllers
         {
             //_example2.GetAllCitiesFromCountry2();
 
-            _example2.GetAttractionsFromCity("Budapest");
+            _recommendationService.GetPinsForCityName("Budapest");
 
             return new[] { "value1", "value2" };
         }

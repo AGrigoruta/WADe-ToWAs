@@ -2,7 +2,8 @@
 {
     public class LocationRequestModel
     {
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        //public float Latitude { get; set; }
+        //public float Longitude { get; set; }
+        public string CityName { get; set; }
     }
 }
