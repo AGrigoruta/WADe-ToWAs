@@ -17,7 +17,7 @@ namespace ToWas.Rdf
         {
             var result = _rdfQueryEngine.GetAttractionsFromCity(cityName);
 
-            return result.Select(x => PinDto.From(x)).ToList();
+            return result.Select(PinDto.From).ToList();
         }
     }
 }
