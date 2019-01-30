@@ -1,0 +1,138 @@
+<!DOCTYPE text/html>
+<html lang="ro">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="keywords" content="project, infoiasi, web" />
+	<title>Wade report</title>
+	<link rel="stylesheet" href="scholarly.css">
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+	<header>
+		<p class="title">UserGuide</p>
+	</header>
+	<article typeof="schema:ScholarlyArticle" resource="#">
+		<h1>ToWAs</h1>
+		<section>
+			<ol>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:author" href="https://www.facebook.com/alex.grigoruta" typeof="schema:Person">
+						<span property="schema:givenName">Alex</span>
+						<span property="schema:familyName">Grigoruta</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:grigoruta.alexandru@info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:contributor" href="https://www.facebook.com/razvan.cazuc" typeof="schema:Person">
+						<span property="schema:givenName">Razvan</span>
+						<span property="schema:additionalName">Constantin</span>
+						<span property="schema:familyName">Cazuc</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:cazuc.constantin.razvan@info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+				<li property="schema:author" typeof="sa:ContributorRole">
+					<a property="schema:contributor" href="https://www.facebook.com/stefan.saramet" typeof="schema:Person">
+						<span property="schema:givenName">Stefan</span>
+						<span property="schema:familyName">Saramet</span>
+					</a>
+					<sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+						<a property="schema:email" href="mailto:saramet.stefan@students.info.uaic.ro" title="corresponding author">✉</a>
+					</sup>
+				</li>
+			</ol>
+			<ol>
+				<li>
+					<a href="http://www.info.uaic.ro/bin/Main/" typeof="schema:CollegeOrUniversity">
+						<span property="schema:name">Faculty of Computer Science Iasi</span>
+					</a>
+				</li>
+				<li>
+					<a href="http://www.uaic.ro/" typeof="schema:CollegeOrUniversity">
+						<span property="schema:name">Alexandru Ioan Cuza University</span>
+					</a>
+				</li>
+			</ol>
+		</section>
+		<section>
+			<a name="Login Page">
+				<h2>Login Page</h2>
+			</a>
+			<p>
+				The landing page is the dashboard which we will see later in this User Guide. If the user is not logged in, he will
+				be redirected automatically to the login page. In the login page, the user has the possibility to use the Facebook
+				account, in order for him to save some precious time, not to create a new account and customize it yet again. When
+				he clicks on the login button, he will be presented with a dialog in which he will have to allow ToWAs to use some
+				of the data Facebook provides (name and profile picture). If the login has been successful, he will be redirected
+				to the landing page
+			</p>
+			<figure typeof="sa:Image">
+				<img src="login.jpg">
+			</figure>
+		</section>
+		<section>
+			<a name="User Details Promp">
+				<h2>User Details Prompt</h2>
+			</a>
+			<p>
+				The first thing he will see in the landing page is a form in which he will provide some basic data, for ToWAs to
+				work. These questions include age range (18-24, 25-35, 36-50, 50+), whether his next trip is a Business Trip, Solo
+				Trip, Family Trip or Friends Trip, whether he already has accommodation, whether he is a sports person, cultural
+				person or in pilgrimage.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="form.png">
+			</figure>
+			<p>
+				After he has completed all the needed details, he can proceed to use ToWAs at it's fullest potential.
+			</p>
+		</section>
+		<section>
+			<a name="Dashboard">
+				<h2>Dashboard</h2>
+			</a>
+			<p>
+				This is the main dashboard. Here, the user can surf on the map however he wishes, although, the first time he
+				enters, he will be centered to his current location (if he allows the Geolocation API to retrieve this data). From
+				here, he can either refill the previous form, search for a trip destination to get itineraries or logout
+			</p>
+			<figure typeof="sa:Image">
+				<img src="dashboard.png">
+			</figure>
+		</section>
+		<section>
+			<a name="Itineraries">
+				<h2>Itineraries</h2>
+			</a>
+			<p>
+				When the user types a destination in the search bar at the top, he will retrieve, faster or slower, depending on
+				his internet speed, a list of points of interest. Most of the results are either Museums, Hotels, Parks or
+				Churches, data retrieved from DBPedia.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="itineraries.jpg">
+			</figure>
+			If he clicks on a selected marker, he will see more information about that specific point of interest. The details
+			include the name, the ontology url for linked data and a short or long description about that specific place.
+			<figure typeof="sa:Image">
+				<img src="details.jpg">
+			</figure>
+			When he decides to leave, the user can click on the greeting from the navbar (including the profile picture), and
+			proceed to logout, having to log back in when he comes back again. If he doesn't want to do that, if he closes the
+			tab or browser, the Facebook id remains active for some time
+			<figure typeof="sa:Image">
+				<img src="logout.jpg">
+			</figure>
+		</section>
+	</article>
+	<footer>
+		@ToWAs
+	</footer>
+</body>
+
+</html>
