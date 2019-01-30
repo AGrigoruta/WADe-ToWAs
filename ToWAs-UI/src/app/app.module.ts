@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { ModalComponent } from './dashboard/modal/modal.component';
 import { FormsModule } from '@angular/forms';
-import { UserService } from './user.service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   entryComponents: [
@@ -31,13 +31,13 @@ import { UserService } from './user.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CoreModule
   ],
   providers: [
     AuthGuardService,
     AuthService,
-    DataService,
-    UserService
+    DataService
   ],
   bootstrap: [AppComponent]
 })

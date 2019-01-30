@@ -9,25 +9,38 @@ import { UserService } from 'src/app/user.service';
 })
 export class ModalComponent implements OnInit {
 
-  selectList: any;
-  selectListTwo: any;
-  selectListThree: any;
-  selectedOptionOne: string;
-  selectedOptionTwo: string;
-  selectedOptionThree: string;
+  ageList: any;
+  tripList: any;
+  stayList: any;
+  culturalList: any;
+  sportList: any;
+  religiousList: any;
+  selectedAge: string;
+  selectedTrip: string;
+  selectedStay: string;
+  selectedCultural: string;
+  selectedSport: string;
+  selectedReligious: string;
   dismissed: boolean;
 
   constructor(public bsModalRef: BsModalRef, private user: UserService) { }
 
   ngOnInit() {
-    this.selectedOptionOne = this.selectList[0].key;
-    this.selectedOptionTwo = this.selectListTwo[0].key;
-    this.selectedOptionThree = this.selectListThree[0].key;
+    this.selectedAge = this.ageList[0].key;
+    this.selectedTrip = this.tripList[0].key;
+    this.selectedStay = this.stayList[0].key;
+    this.selectedCultural = this.culturalList[0].key;
+    this.selectedSport = this.sportList[0].key;
+    this.selectedReligious = this.religiousList[0].key;
   }
 
   submit() {
-    console.log(this.selectedOptionOne, this.selectedOptionTwo, this.selectedOptionThree);
-    this.user.setTest(this.selectedOptionOne);
+    this.user.setAge(this.selectedAge);
+    this.user.setTrip(this.selectedTrip);
+    this.user.setStay(this.selectedStay);
+    this.user.setCultural(this.selectedCultural);
+    this.user.setSport(this.selectedSport);
+    this.user.setReligious(this.selectedReligious);
     this.dismissed = false;
     this.bsModalRef.hide();
   }

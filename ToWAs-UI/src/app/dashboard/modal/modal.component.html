@@ -7,21 +7,39 @@
 <div class="modal-body">
   <form>
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Dropdown 1</label>
-      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedOptionOne" name="selectOne">
-        <option *ngFor="let val of selectList" [value]="val.key">{{val.value}}</option>
+      <label for="exampleFormControlSelect1">What's your age group?</label>
+      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedAge" name="selectOne">
+        <option *ngFor="let val of ageList" [value]="val.key">{{val.value}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Dropdown 2</label>
-      <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="selectedOptionTwo" name="selectTwo">
-        <option *ngFor="let val of selectListTwo" [value]="val.key">{{val.value}}</option>
+      <label for="exampleFormControlSelect2">What kind of trip are you going on next?</label>
+      <select class="form-control" id="exampleFormControlSelect2" [(ngModel)]="selectedTrip" name="selectTwo">
+        <option *ngFor="let val of tripList" [value]="val.key">{{val.value}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect3">Dropdown 3</label>
-      <select class="form-control" id="exampleFormControlSelect3" [(ngModel)]="selectedOptionThree" name="selectThree">
-        <option *ngFor="let val of selectListThree" [value]="val.key">{{val.value}}</option>
+      <label for="exampleFormControlSelect3">Do you have accommodation ready for the next trip?</label>
+      <select class="form-control" id="exampleFormControlSelect3" [(ngModel)]="selectedStay" name="selectThree">
+        <option *ngFor="let val of stayList" [value]="val.key">{{val.value}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect4">Do you enjoy art and museums?</label>
+      <select class="form-control" id="exampleFormControlSelect4" [(ngModel)]="selectedCultural" name="selectFour">
+        <option *ngFor="let val of culturalList" [value]="val.key">{{val.value}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect5">Are you a sports person?</label>
+      <select class="form-control" id="exampleFormControlSelect5" [(ngModel)]="selectedSport" name="selectFive">
+        <option *ngFor="let val of sportList" [value]="val.key">{{val.value}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect6">Do you travel for pilgrimage?</label>
+      <select class="form-control" id="exampleFormControlSelect6" [(ngModel)]="selectedReligious" name="selectSix">
+        <option *ngFor="let val of religiousList" [value]="val.key">{{val.value}}</option>
       </select>
     </div>
   </form>

@@ -118,7 +118,7 @@ export class MapComponent implements OnInit, OnChanges {
             content.innerHTML = '';
             content.innerHTML += '<p>Name:</p><code>' + item.get('name') + '</code><br>';
             content.innerHTML += '<p>Type:</p><code>' + item.get('attractionType') + '</code><br>'
-            content.innerHTML += '<p>Coordinates:</p><code>' + hdms + '</code>'
+            content.innerHTML += '<p>Description:</p><code>' + item.get('abstract') + '</code>'
             this.overlay.setPosition(coordinate);
             return;
           }
@@ -147,7 +147,7 @@ export class MapComponent implements OnInit, OnChanges {
         geometry: new OlPoint(fromLonLat([item.longitude, item.latitude])),
         name: item.description,
         nameUrl: item.descriptionUrl,
-        // picture: item.picture,
+        abstract: item.abstract,
         attractionType: item.attractionType,
         attractionTypeUrl: item.attractionTypeUrl,
         country: item.country
