@@ -18,27 +18,22 @@ namespace ToWas.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ItineraryModel>> Get()
+        public List<ItineraryModel> Get()
         {
             return new List<ItineraryModel>();
         }
 
         [HttpGet("city/{cityName}")]
-        public ActionResult<IEnumerable<ItineraryModel>> GetItineraryByCityName(string cityName)
+        public ActionResult<List<ItineraryModel>> GetItineraryByCityName(string cityName)
         {
             return new List<ItineraryModel>();
         }
 
         [HttpPost("location")]
-        public ActionResult<IEnumerable<ItineraryModel>> GetItineraryByCurrentLocation(
+        public List<ItineraryModel> GetItineraryByCurrentLocation(
             [FromBody] LocationRequestModel location)
         {
             var pins = _recommendationService.GetPinsForCityName(location.CityName);
-
-            if (pins == null)
-            {
-                return NotFound();
-            }
 
             return pins.Select(ItineraryModel.From).ToList();
         }
