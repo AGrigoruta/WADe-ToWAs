@@ -21,7 +21,14 @@ namespace ToWas.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
 
             services.AddTransient(typeof(ExampleRdfClass));
             services.AddTransient(typeof(SparqlExampleClass));
@@ -36,9 +43,7 @@ namespace ToWas.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(
-                options => options.WithOrigins("http://localhost:4200").AllowAnyMethod()
-            );
+            app.UseCors("CorsPolicy");
 
             app.UseMvc();
         }
