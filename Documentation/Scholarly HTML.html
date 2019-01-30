@@ -147,18 +147,14 @@
 				<h2>Technologies</h2>
 			</a>
 			<p>
-				For the Back-End part, we decided to use Java EE using Spring Boot, since it's easy to configure, and we have some 
-				experience with it from other University projects from the past years. We will use Jersey for developing the RESTful
-				API, and Apache Jena for the Semantic part which can handle RDF, RDFS, RDFa, OWL and SPARQL. As for the database, we opted
-				for a NoSQL db, using MongoDB since it's lightweight, having easy to access and edit records, in which we will store mostly 
-				user data.
+				For the Back-End part, we decided to use C# and .NET Core, since it's easy to configure and it provides a lot of usefull features, and we have some 
+				experience with it from other University projects from the past years. We will use ASP .NET Core WebAPI for developing the RESTful
+				API, and .NET RDF for the Semantic part which can handle RDF, RDFS, RDFa, OWL and SPARQL. We didn't consider necessary the use of a database because the login is being done only through Facebook API so that we can gather as much information about the user as possible. All the other data was stored just for the duration of the session because the parameters for the recommandations can change with every request from the user. 
 			</p>
 			<p>
-				For the Front-End part, we aim for a Single Page Application (SPA), using React as the main helping library, but we
-				will not abuse it and also have plain JavaScript code snippets for the native performance boost and get rid of redundant
-				boilerplating. We will use the latest stable ECMAScript spec (ES8), and Webpack in order to optimize the build and overall
+				For the Front-End part, we aim for a Single Page Application (SPA), using Angular 7 as the main helping library. We will use the latest stable ECMAScript spec (ES8), and Webpack in order to optimize the build and overall
 				performance of the application. As for the styling of the page, ToWAs will have Sass as the main CSS preprocessor. The map
-				will be rendered using OpenLayers and retrieve relevant data about locations from Google Maps API.
+				will be rendered using OpenLayers and retrieve relevant data about locations from OpenLayers aswell.
 			</p>
 		</section>
 		<section>
@@ -177,7 +173,7 @@
 				We opted for a Single-Page Application, which is simplifying the user experience and dynamically loading the data in order
 				to focus on the offered services. When the user launches the application he will be sent to the login page, where he has a small
 				description about the application and a Facebook login button, which will redirect him to a Facebook permission granting page and
-				afterwards to the landing page of ToWAs
+				afterwards to the landing page of ToWAs.
 			</p>
 			<figure typeof="sa:Image">
 				<img src="ToWAs login page.png">
@@ -185,8 +181,7 @@
 			<p>
 				After logging in, he will be presented with the landing page, the dashboard, setting the main focus on the map itself. The first time
 				when the user logs in, the application will get his current position and try to create a general trip plan for it and display points
-				of interest on the map. When he hovers over them, he will have additional data about them, including how many of his Facebook friends
-				have been there and he will be able to see their pictures as well. The search bar from the navbar is there for the user to search for
+				of interest on the map. When he hovers over them, he will have additional data about them, including the name and a brief description. The search bar from the navbar is there for the user to search for
 				a location and see what does ToWAs generate for it. On the top right he has three buttons. The first one is actually his profile picture 
 				from Facebook if he has one, and if he clicks it he will have two options: to view his profile with the data he provides ToWAs with and 
 				the option to logout.
@@ -217,14 +212,10 @@
 				<h2>Data</h2>
 			</a>
 			<p>
-				The main data we will use is retrieved from Facebook, using their Graph API, and more precisely, we will check the user's basic
-				information (age, gender, relationship, etc.), user likes, user friends extended to their check-ins and photos from there. The 
-				user data will be completed using our own forms, just in case the user does not have too many details projected on Facebook, in
-				order to create a better profiling.
+				We wanted to use the data from Facebook as the main source of information for making recommandations, but unfortunately Facebook no longer gives access to fields containing personal information of the user, what he likes, where he travelled, etc because of the new GDPR laws. We are forced to gather most of our information directly from the user's input through a form and make a recommandation using that data.
 			</p>
 			<p>
-				As for GeoData data, we will have a combination of three semantic-enabled providers: LinkedGeoData, WikiVoyage and Wikidata. To 
-				follow the traveller trends all over Europe, we will make use of Eurostat's statistics and comply our recommendations based on that.
+				As for GeoData data, we will have a combination of three semantic-enabled providers: Dbpedia and Wikidata. 
 				The geodata will be accessed through SPARQL endpoints provided by each API.
 			</p>
 		</section>
@@ -249,11 +240,35 @@
 				</li>
 			</ul>
 			<p>
-				For our application we are going to use a Hybrid approach, combining both content based recommendation and collaborative recommendation.
+				For our application we are going to use a Content based approach.
 				We will retrieve all the data that the user fills in our form regarding the next trip and filter exactly the relevant data, then based on
-				his check-ins and likes we can then optimise our result. The collaborative part requires the user's friend data, their check-ins, their 
-				interests and recommend locations and points of interest based on that.
+				his check-ins and likes we can then optimise our result.
 			</p>
+		</section>
+		<section>
+			<a name="implementare">
+				<h2>Implementation</h2>
+			</a>
+			<p>
+				As we mentioned above, the first problem that we encountered was that we could no longer use Facebook API to get informations about the user because the GDPR prohibits Facebook from sharing the user's personal data with people without the permission of said user.  We still decided to use facebook API as a login mechanism. 
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs fin1.jpg">
+			</figure>
+			<p>
+
+
+				For the GUI we used OpenLayers to render the map. Upon logging in, the user has to complete a form containing some details about himself. We will use this data to offer him recommendations for places to visit. Upon initiating a new search for places to visit in a certain town, the client application sends the backend the name of the city.
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs fin2.png">
+			<p>	
+
+			
+				The backend API uses querys to get data from Dbpedia, Wikidata, etc using SparQL, based on the user information and locations in the city. The response is divided into categories to make it easier for the recommendation system to pick what objectives to send back to the client. The recommendation system is composed of multiple filters for each piece of data the user gave us, and tries to match his every need. 
+			</p>
+			<figure typeof="sa:Image">
+				<img src="ToWAs fin3.jpg">
 		</section>
 		<section>
 			<a name="blog">
