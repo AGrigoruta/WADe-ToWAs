@@ -8,23 +8,19 @@ namespace ToWas.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly ExampleRdfClass _example1;
         private readonly SparqlExampleClass _example2;
 
-        public ValuesController(
-            ExampleRdfClass example1,
-            SparqlExampleClass example2)
+        public ValuesController(SparqlExampleClass example2)
         {
-            _example1 = example1;
             _example2 = example2;
         }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _example1.DoSomething();
+            //_example2.GetAllCitiesFromCountry2();
 
-            _example2.DoSomething();
+            _example2.GetAttractionsFromCity("Budapest");
 
             return new[] { "value1", "value2" };
         }
