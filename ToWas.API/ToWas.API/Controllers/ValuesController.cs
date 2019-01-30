@@ -22,7 +22,7 @@ namespace ToWas.API.Controllers
         {
             //_example2.GetAllCitiesFromCountry2();
 
-            _recommendationService.GetPinsForCityName("Budapest");
+            var t = _recommendationService.GetPinsForCityName("Budapest");
 
             return new[] { "value1", "value2" };
         }
