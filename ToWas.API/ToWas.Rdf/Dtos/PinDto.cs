@@ -21,9 +21,11 @@ namespace ToWas.Rdf.Dtos
             string attractionType = sparqlResult[2].AsValuedNode().AsString();
             float latitude = sparqlResult[4].AsValuedNode().AsFloat();
             float longitude = sparqlResult[3].AsValuedNode().AsFloat();
+            string description = graphUriAbsoluteUri.Remove(0,"http://dbpedia.org/resource/".Length);
 
             return new PinDto
             {
+                Description = description,
                 DescriptionUrl = graphUriAbsoluteUri,
                 AttractionTypeUrl = attractionTypeUrl,
                 AttractionType = attractionType,
