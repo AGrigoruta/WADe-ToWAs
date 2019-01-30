@@ -2,7 +2,7 @@
   <div class="dashboard__navbar_title">Tourist Web Assistant</div>
   <div class="dashboard__navbar_toolbar">
     <div class="dashboard__navbar_search-container">
-      <input type="text" class="form-control dashboard__navbar_search" placeholder="Search country" aria-label="Search country">
+      <input type="text" [(ngModel)]="citySearch" (keyup)="searchCity($event)" name="search" class="form-control dashboard__navbar_search" placeholder="Search country" aria-label="Search country">
       <div class="dashboard__navbar_search-icon">
         <i class="fas fa-search"></i>
       </div>
@@ -25,4 +25,4 @@
     </div>
   </div>
 </div>
-<app-map></app-map>
+<app-map [data]="itinerary"></app-map>

@@ -12,4 +12,9 @@ export class DataService {
     let url = `${this.apiUrl}/values`;
     return this.http.get(url);
   }
+
+  sendCityName(data: any): Observable<any> {
+    let url = `${this.apiUrl}/itinerary/location`;
+    return this.http.post(url, data);
+  }
 }
