@@ -1,6 +1,6 @@
-﻿namespace ToWas.API.Models
+﻿namespace ToWas.Rdf.Dtos
 {
-    public class LocationRequestModel
+    public class UserPreferencesDto
     {
         public string CityName { get; set; }
         public string Age { get; set; }

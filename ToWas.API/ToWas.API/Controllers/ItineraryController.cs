@@ -28,7 +28,17 @@ namespace ToWas.API.Controllers
         [HttpGet("city/{cityName}")]
         public ActionResult<ItineraryModel[]> GetItineraryByCityName(string cityName)
         {
-            return new List<ItineraryModel>().ToArray();
+            List<PinDto> pins;
+            try
+            {
+                pins = _recommendationService.GetPinsForCityName(cityName);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            return pins.Select(ItineraryModel.From).ToArray();
         }
 
         [HttpPost("location")]
@@ -38,7 +48,15 @@ namespace ToWas.API.Controllers
             List<PinDto> pins;
             try
             {
-                pins = _recommendationService.GetPinsForCityName(location.CityName);
+                pins = _recommendationService.GetPinsForUserPreferences(new UserPreferencesDto
+                {
+                    CityName = location.CityName,
+                    Age = location.Age,
+                    IsCultural = location.IsCultural,
+                    IsInterestedInAccomodation = location.IsInterestedInAccomodation,
+                    IsInterestedInSports = location.IsInterestedInSports,
+                    TripType = location.TripType
+                });
             }
             catch (Exception)
             {
