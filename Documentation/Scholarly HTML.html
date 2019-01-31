@@ -258,7 +258,7 @@
 			<p>
 
 
-				For the GUI we used OpenLayers to render the map. Upon logging in, the user has to complete a form containing some details about himself. We will use this data to offer him recommendations for places to visit. Upon initiating a new search for places to visit in a certain town, the client application sends the backend the name of the city.
+				For the GUI we used OpenLayers to render the map. Upon logging in, the user has to complete a form containing some details about himself. We will use this data to offer him recommendations for places to visit. Upon initiating a new search for places to visit in a certain town, the client application sends the backend the name of the city. Upon response, pins are placed on the map to show the location of the points of interest. The answer usually contains between 5 and 9 points of interest. The user can change his journey's filters at any time to get new recomandations, by pressing the "plus" button on the GUI. 
 			</p>
 			<figure typeof="sa:Image">
 				<img src="ToWAs fin2.png">
@@ -269,6 +269,35 @@
 			</p>
 			<figure typeof="sa:Image">
 				<img src="ToWAs fin3.jpg">
+
+			<p>
+			<figure typeof="sa:Image">
+				<img src="SparQL query.jpg">
+
+				Above we have an image of the query used to get most of our data from the endpoint. We select:
+				 	-"thing" which represents our points of interest 
+				 	-"abs" which respresents a brief description of the said "thing"
+				 	-"type" which is used the define the type of the point of interest
+				 	-"typename" is a way for us to easily group all the data we gather
+				 	-"long" and "lat" are the geographical coordinates
+				 	-"country" which return the name of the country the city we search for is located in.
+
+				We fetch the city name from the client application. Afterwards, we define "thing" as a certain "type" from Dbpedia of our choosing, in this case "Hotel", "Museum", "Park" etc. We use the optional tag so that the query never return empty. At the end we also filter based on "type" and the language of the abstract.
+
+
+				Doing the query this way makes it easy to add new types of points of interest and it is easy to create new types of objects without writing redundant code.
+
+
+		<section>
+			<a name="Further_Dev">
+				<h2>Further Development</h2>
+			</a>		 
+
+			<p>
+
+			For further development we could implement a database to record the points of interest the users were already given so that we don't repeat the recommendations. 
+
+			</p>	
 		</section>
 		<section>
 			<a name="blog">
